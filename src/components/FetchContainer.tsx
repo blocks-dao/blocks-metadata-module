@@ -6,7 +6,7 @@ import { IonButton } from '@ionic/react';
 
 declare const window: any;
 
-const web3 = new Web3('https://mainnet.infura.io/v3/d3c4f2797e3a4cf58abe072ec382a191');
+const web3 = new Web3('https://mainnet.infura.io/v3/<ADD_YOUR_INFURA_API_KEY_HERE>');
 
 interface ContainerProps { }
 
