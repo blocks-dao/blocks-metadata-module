@@ -1,5 +1,7 @@
-const blocksData = {
+const blocksData: any = {
     blocksAddress: "0x8a6d4c8735371ebaf8874fbd518b56edd66024eb",
+    blocksXdaiAddress: "0x4D6395328104c29b9a5a546ECbbCe2fc75D9b519",
+    blocksPolygonAddress: "0x8a6D4C8735371EBAF8874fBd518b56Edd66024eB",
     blocksAbi: [
       {
          "inputs":[
@@ -693,5 +695,4 @@ const blocksData = {
       }
    ]
   };
-
 export default blocksData;

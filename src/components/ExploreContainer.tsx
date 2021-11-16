@@ -12,7 +12,9 @@ import uploadToIpfs from "../ipfsService";
 
 declare const window: any;
 
-const web3 = new Web3('https://mainnet.infura.io/v3/<ADD_YOUR_INFURA_API_KEY_HERE>');
+const web3 = new Web3('https://mainnet.infura.io/v3/d3c4f2797e3a4cf58abe072ec382a191');
+// URL to connect to xDAI Network: https://rpc.xdaichain.com
+// URL to connect to Polygon Network: https://polygon-rpc.com
 
 interface ContainerProps { }
 
@@ -96,9 +98,10 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
       "external_url":`${website}`,
       "youtube_url":`${youtube}`,
       "animation_url":`${ipfsMedia}`,
-      "blocks_data":`${contractAddress}`
+      "blocks_data":``
   }
     setMetadata(JSON.stringify(jsonData));
+
   }
 
   const calculateContractAddress = async (address: string) => {
@@ -130,16 +133,19 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
       const contract = new ethers.Contract(blocksData.blocksAddress, blocksData.blocksAbi, provider);
       let contractSigner = contract.connect(signer);
 
+      //When connecting to the xDAI Network use blocksData.blocksXdaiAddress above.
+      //When connecting to the Polygon Network use blocksData.blocksPolygonAddress above.
+
       //Define the data you want to insert on-chain and convert to hex
       let dataConverted = web3Utils.toHex(metadata);
 
       //You can send any amount of BLOCKS tokens with the transaction. BigNumber helps JavaScript deal with large numbers involving BLOCKS' 18 decimals. In this case we are sending 2 BLOCKS.
-      //let amount = new BigNumber(2000000000000000000);
-      //console.log(amount.toFixed())
+      let amount = new BigNumber(2000000000000000000);
+      console.log(amount.toFixed())
 
       //Now you can call the "send" function by entering a receiving address, amount and the converted data.
       let receivingAddress = "0xf0e3ea754D038b979CD0124e2f1A4Bf44f32746a"
-      contractSigner.send(receivingAddress, 0, dataConverted).then((tx: any)=>{
+      contractSigner.send(receivingAddress, amount.toFixed(), dataConverted).then((tx: any)=>{
         if(tx){
           //View the transaction response and get the transaction hash
           console.log(tx)
